@@ -1,32 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchFeaturedItems} from "../../redux/feturedSlice";
+import CatalogItem from "../CatalogItem";
 
 const Fetured = () => {
+  const dispatch = useDispatch();
+  const {items, loading, error} = useSelector((state) => state.featuredItems);
+
+  useEffect(() => {
+    dispatch(fetchFeaturedItems("http://lepihov.by/api-fashion-shop/fetured"));
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <section className="feturedItems container">
-      <h1>Fetured Items</h1>
-      <p className="description">Shop for items based on what we featured in this week</p>
+      <h1>Featured Items</h1>
+      <p className="description">Shop for items based on what we featured this week</p>
       <div className="catalogItems">
-        <template id="templateFeturedItem">
-          <div className="catalogItems__item catalogItem" data-id="">
-            <div className="catalogItem__photo">
-              <img src="" alt="Fetured item"/>
-              <div className="catalogItem__fill">
-                <div className="catalogItem__button">
-                  <img src="./img/basket.svg" alt="Add to cart"/>
-                  <p>Add to Cart</p>
-                </div>
-              </div>
-            </div>
-            <div className="catalogItem__text">
-              <h3 className="catalogItem__title"></h3>
-              <p className="catalogItem__description"></p>
-              <p className="catalogItem__price"></p>
-            </div>
-          </div>
-        </template>
+        {items.map((item) => (
+          <CatalogItem key={item.id} item={item}/>
+        ))}
       </div>
       <div className="feturedItems__buttons">
-        <button id="catalogButton" className="feturedItems__allButton">Browse All Product</button>
+        <button id="catalogButton" className="feturedItems__allButton">Browse All Products</button>
       </div>
     </section>
   );

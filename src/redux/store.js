@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
-// import usersReducer from './usersSlice1';
-// import userReducer from './userSlice';
+import featuredReducer from './feturedSlice';
+import catalogReducer from './catalogSlice';
+import cartReducer from './cartSlice';
 
 const store = configureStore({
   reducer: {
-    // users: usersReducer,
-    // user: userReducer,
+    featuredItems: featuredReducer,
+    catalogItems: catalogReducer,
+    cartItems: cartReducer,
   },
 });
 
