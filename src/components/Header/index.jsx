@@ -1,8 +1,11 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import MainMenu from "../MainMenu";
+import {useSelector} from "react-redux";
 
 const Header = () => {
+  const totalCount = useSelector((state) => state.cartItems.totalCount);
+
   return (
     <nav className="navigation">
       <div className="container">
@@ -15,7 +18,7 @@ const Header = () => {
           <NavLink className="navigation__button buttonProfile" to="registration"><img src="./img/profile.png"
                                                                                         alt="Profile"/></NavLink>
           <NavLink to="cart" className="navigation__button buttonBasket"><img src="./img/basket.png" alt="Basket"/>
-            <div className="basketCounter"></div>
+            <div className="basketCounter">{totalCount}</div>
           </NavLink>
         </div>
         <MainMenu />

@@ -2,6 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  totalPrice: 0,
+  totalCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -9,8 +11,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      const item = state.items.find(item => item.id === action.payload.id
-        && item.size === action.payload.size && item.type === action.payload.type);
+      // const item = state.items.find(item => item.id === action.payload.id
+      //   && item.size === action.payload.size && item.type === action.payload.type);
+
+      const item = state.items.find(item => item.id === action.payload.id);
+
       if (item) {
         item.count++;
         state.totalPrice += action.payload.price;
@@ -22,8 +27,11 @@ const cartSlice = createSlice({
       // saveCartState(state);
     },
     delProduct: (state, action) => {
-      const itemIndex = state.items.findIndex(item => item.id === action.payload.id
-        && item.size === action.payload.size && item.type === action.payload.type);
+      // const itemIndex = state.items.findIndex(item => item.id === action.payload.id
+      //   && item.size === action.payload.size && item.type === action.payload.type);
+
+      const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
+
       if (itemIndex > -1) {
         const item = state.items[itemIndex];
         state.totalPrice -= item.price
@@ -46,11 +54,11 @@ const cartSlice = createSlice({
       state.totalCount = state.totalCount - itemToDelete.count;
       // saveCartState(state);
     },
-    clear: (state) => {
+    clearCart: (state, action) => {
       state.items = [];
       state.totalPrice = 0;
       state.totalCount = 0;
-      saveCartState(state);
+      // saveCartState(state);
     },
     increaseCount: (state, action) => {
       const item = state.items[action.payload];
@@ -69,9 +77,9 @@ const cartSlice = createSlice({
         state.totalCount--;
         // saveCartState(state);
       }
-    }
+    },
   }
 });
 
-export const {delProductByCartID, increaseCount, decreaseCount, clear, addProduct, delProduct} = cartSlice.actions;
+export const {delProductByCartID, increaseCount, decreaseCount, clearCart, addProduct, delProduct} = cartSlice.actions;
 export default cartSlice.reducer;

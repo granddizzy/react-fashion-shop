@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import featuredReducer from './feturedSlice';
 import catalogReducer from './catalogSlice';
+import catalogFilterReducer from './catalogFilterSlice';
 import cartReducer from './cartSlice';
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
     featuredItems: featuredReducer,
     catalogItems: catalogReducer,
     cartItems: cartReducer,
+    catalogFilter: catalogFilterReducer,
   },
 });
 
