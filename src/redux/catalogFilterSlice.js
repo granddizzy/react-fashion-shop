@@ -5,6 +5,7 @@ const initialState = {
   trendingNow: false,
   maxPrice: 0,
   minPrice: 0,
+  type: '',
 };
 
 const catalogFilerSlice = createSlice({
@@ -31,8 +32,14 @@ const catalogFilerSlice = createSlice({
         state.sizes.push(size);
       }
     },
+    setType: (state, action) => {
+      state.type = action.payload;
+    },
+    toggleTrendingNow: (state, action) => {
+      state.trendingNow = !state.trendingNow;
+    }
   },
 });
 
-export const {toggleSize, setSizes, setTrendingNow, setMaxPrice, setMinPrice} = catalogFilerSlice.actions;
+export const {toggleTrendingNow, setType, toggleSize, setSizes, setTrendingNow, setMaxPrice, setMinPrice} = catalogFilerSlice.actions;
 export default catalogFilerSlice.reducer;

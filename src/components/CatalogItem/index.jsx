@@ -1,6 +1,7 @@
 import React from 'react';
 import {addProduct, delProduct} from "../../redux/cartSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {NavLink} from "react-router-dom";
 
 const CatalogItem = ({item}) => {
   const dispatch = useDispatch();
@@ -27,11 +28,13 @@ const CatalogItem = ({item}) => {
           </div>
         </div>
       </div>
-      <div className="catalogItem__text">
-        <h3 className="catalogItem__title">{item.title}</h3>
-        <p className="catalogItem__description">{item.description}</p>
-        <p className="catalogItem__price">{item.price}</p>
-      </div>
+      <NavLink to={`/catalog/${item.id}`}>
+        <div className="catalogItem__text">
+          <h3 className="catalogItem__title">{item.title}</h3>
+          <p className="catalogItem__description">{item.description}</p>
+          <p className="catalogItem__price">{item.price}</p>
+        </div>
+      </NavLink>
     </div>
   );
 };

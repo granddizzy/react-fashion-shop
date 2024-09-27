@@ -7,7 +7,7 @@ import CatalogItem from "../CatalogItem";
 const Catalog = () => {
   const dispatch = useDispatch();
   const {items, loading, error} = useSelector((state) => state.catalogItems);
-  const {sizes, trendingNow, minPrice, maxPrice} = useSelector((state) => state.catalogFilter);
+  const {type, sizes, trendingNow, minPrice, maxPrice} = useSelector((state) => state.catalogFilter);
 
   const generateQueryParams = () => {
     const params = new URLSearchParams();
@@ -16,13 +16,17 @@ const Catalog = () => {
       sizes.forEach(size => params.append("size", size));
     }
     if (trendingNow) {
-      params.append("trendingNow", trendingNow);
+      params.append("trending_now", trendingNow);
     }
     if (minPrice !== null) {
-      params.append("minPrice", minPrice);
+      params.append("min_price", minPrice);
     }
     if (maxPrice !== null) {
-      params.append("maxPrice", maxPrice);
+      params.append("max_price", maxPrice);
+    }
+
+    if (type !== '') {
+      params.append("type", type);
     }
 
     return params.toString();

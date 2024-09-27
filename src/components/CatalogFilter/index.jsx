@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {toggleSize} from "../../redux/catalogFilterSlice";
+import {toggleSize, toggleTrendingNow, setMinPrice, setMaxPrice} from "../../redux/catalogFilterSlice";
 
 const CatalogFilter = () => {
   const dispatch = useDispatch();
@@ -8,6 +8,24 @@ const CatalogFilter = () => {
 
   const handleSizeChange = (size) => {
     dispatch(toggleSize(size));
+  };
+
+  const handleToggleTrending = () => {
+    dispatch(toggleTrendingNow());
+  };
+
+  const handleMinPriceChange= (e) => {
+    const value = e.target.value;
+    if (!isNaN(value) && value.trim() !== '') {
+      dispatch(setMinPrice(parseFloat(value)));
+    }
+  };
+
+  const handleMaxPriceChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value) && value.trim() !== '') {
+      dispatch(setMaxPrice(parseFloat(value)));
+    }
   };
 
   return (
@@ -58,7 +76,14 @@ const CatalogFilter = () => {
         <details className="filter__item">
           <summary>TRENDING NOW</summary>
           <div className="filter__detailsBox filter__menuTrending">
-
+            <label>
+              <input
+                type="checkbox"
+                checked={trendingNow}
+                onChange={() => handleToggleTrending()}
+              />
+              &nbsp;Trending
+            </label>
           </div>
         </details>
         <details className="filter__item">
@@ -66,12 +91,12 @@ const CatalogFilter = () => {
           <div className="filter__detailsBox filter__menuSize">
             {['XS', 'S', 'M', 'L'].map(size => (
               <label key={size}>
-                <input
+              <input
                   type="checkbox"
                   checked={sizes.includes(size)}
                   onChange={() => handleSizeChange(size)}
                 />
-                {size}
+                &nbsp;{size}
               </label>
             ))}
           </div>
@@ -79,7 +104,22 @@ const CatalogFilter = () => {
         <details className="filter__item">
           <summary>PRICE</summary>
           <div className="filter__detailsBox filter__menuPrice">
-
+            <label>
+              <input
+                type="text"
+                value={minPrice}
+                onChange={handleMinPriceChange}
+              />
+              &nbsp;min
+            </label>
+            <label>
+              <input
+                type="text"
+                value={maxPrice}
+                onChange={handleMaxPriceChange}
+              />
+              &nbsp;max
+            </label>
           </div>
         </details>
       </div>

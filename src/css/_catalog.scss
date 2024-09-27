@@ -100,8 +100,19 @@
   }
 
   .filter {
-    &__menuSize, &__menuTrending, &__menuPrice {
-      width: 80px;
+    &__menuSize {
+      width: 70px;
+    }
+
+    &__menuTrending {
+      width: 130px;
+    }
+
+    &__menuPrice {
+      width: 100px;
+      input {
+        width: 40px;
+      }
     }
   }
 

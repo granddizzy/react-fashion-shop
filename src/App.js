@@ -4,7 +4,7 @@ import './css/style.css';
 import Main from './pages/Main';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Product from './pages/Product';
+import CatalogProduct from './pages/CatalogProduct';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Catalog from "./pages/Catalog";
 import Registration from "./pages/registration";
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main/>}/>
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/product/:id" element={<Product/>}/>
+          <Route path="/catalog/:productId" element={<CatalogProduct/>}/>
           <Route path="/catalog" element={<Catalog/>}/>
           <Route path="/registration" element={<Registration/>}/>
           {/*<Route path="*" element={<NotFount/>}/>*/}
