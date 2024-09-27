@@ -6,7 +6,7 @@ const ProductSlider = ({product}) => {
       <div className="bigContainer">
         <div className="carousel-control-prev1 productSlider__button" data-bs-target="#carouselExampleIndicators"
              data-bs-slide="prev">
-          <img src="./img/sliderLeftButton.svg" alt=""/>
+          <img src='/img/sliderLeftButton.svg' alt=""/>
         </div>
         <div id="carouselExampleIndicators" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-inner">
@@ -17,7 +17,7 @@ const ProductSlider = ({product}) => {
         </div>
         <div className="carousel-control-next1 productSlider__button"
              data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <img src="./img/sliderRightButton.svg" alt=""/>
+          <img src='/img/sliderRightButton.svg' alt=""/>
         </div>
       </div>
     </div>
