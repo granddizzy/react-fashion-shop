@@ -32,7 +32,7 @@ const CatalogItem = ({item}) => {
         <div className="catalogItem__text">
           <h3 className="catalogItem__title">{item.title}</h3>
           <p className="catalogItem__description">{item.description}</p>
-          <p className="catalogItem__price">{item.price}</p>
+          <p className="catalogItem__price">{item.price.toFixed(2)}</p>
         </div>
       </NavLink>
     </div>

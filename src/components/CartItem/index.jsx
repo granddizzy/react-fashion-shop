@@ -23,7 +23,7 @@ const CatalogItem = ({item}) => {
         <div className="shoppingItem__rightSide">
           <div className="shoppingItem__rightSideContent">
             <h1>{item.title}</h1>
-            <p>Price: <span className="shoppingItem__price">{item.price}</span></p>
+            <p>Price: <span className="shoppingItem__price">{item.price.toFixed(2)}</span></p>
             <p>Color: <span className="shoppingItem__color">item.color</span></p>
             <p>Size: <span className="shoppingItem__size">{item.size}</span></p>
             <p>

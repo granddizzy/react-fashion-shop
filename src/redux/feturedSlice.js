@@ -1,14 +1,18 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchFeaturedItems = createAsyncThunk(
   'featured/fetchFeaturedItems',
   async (url) => {
-    const response = await axios.get(url);
-    if (response.status !== 200) {
-      throw new Error(`Error: ${response.statusText}`)
+    try {
+      const response = await axios.get(url);
+      if (response.status !== 200) {
+        throw new Error(`Error: ${response.statusText}`)
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
     }
-    return response.data;
   }
 );
 

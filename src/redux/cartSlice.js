@@ -18,10 +18,10 @@ const cartSlice = createSlice({
 
       if (item) {
         item.count++;
-        state.totalPrice += action.payload.price;
+        state.totalPrice = parseFloat((state.totalPrice + action.payload.price).toFixed(2));
       } else {
         state.items.push({...action.payload, count: 1});
-        state.totalPrice += action.payload.price;
+        state.totalPrice = parseFloat((state.totalPrice + action.payload.price).toFixed(2));
       }
       state.totalCount++;
       // saveCartState(state);
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
 
       if (itemIndex > -1) {
         const item = state.items[itemIndex];
-        state.totalPrice -= item.price
+        state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
         if (item.count > 1) {
           item.count--;
         } else {
@@ -49,7 +49,7 @@ const cartSlice = createSlice({
       // if (itemToDelete) {
       //state.items = state.items.filter(item => item.id !== action.payload);
       state.items.splice(action.payload, 1);
-      state.totalPrice -= itemToDelete.price * itemToDelete.count;
+      state.totalPrice = parseFloat((state.totalPrice - itemToDelete.price * itemToDelete.count).toFixed(2));
       // }
       state.totalCount = state.totalCount - itemToDelete.count;
       // saveCartState(state);
@@ -64,7 +64,7 @@ const cartSlice = createSlice({
       const item = state.items[action.payload];
       if (item.count < 10) {
         item.count++;
-        state.totalPrice += item.price;
+        state.totalPrice = parseFloat((state.totalPrice + item.price).toFixed(2));
         state.totalCount++;
         // saveCartState(state);
       }
@@ -73,7 +73,7 @@ const cartSlice = createSlice({
       const item = state.items[action.payload];
       if (item.count > 1) {
         item.count--;
-        state.totalPrice -= item.price;
+        state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
         state.totalCount--;
         // saveCartState(state);
       }

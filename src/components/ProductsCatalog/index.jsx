@@ -37,6 +37,7 @@ const Catalog = () => {
     dispatch(fetchCatalogItems(`https://lepihov.by/api-fashion-shop/catalog?${queryParams}`));
   }, [sizes, trendingNow, minPrice, maxPrice]);
 
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 

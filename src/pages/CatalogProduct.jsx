@@ -10,6 +10,8 @@ const CatalogProduct = () => {
 
   const dispatch = useDispatch();
   const {product, loading, error} = useSelector((state) => state.product);
+  const cartItems = useSelector((state) => state.cartItems.items);
+  const isInCart = cartItems.some(cartItem => cartItem.id === product.id);
 
   useEffect(() => {
     dispatch(fetchProduct(`https://lepihov.by/api-fashion-shop/catalog/${productId}`));
@@ -20,8 +22,12 @@ const CatalogProduct = () => {
 
   return (
     <>
-      <ProductSlider product={product}/>
-      <ProductDescription product={product}/>
+      {product && (
+        <>
+          <ProductSlider product={product} />
+          <ProductDescription product={product} />
+        </>
+      )}
     </>
   );
 };

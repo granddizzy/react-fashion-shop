@@ -6,10 +6,10 @@ import {useDispatch, useSelector} from "react-redux";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cartItems.items);
+  const {items, totalPrice} = useSelector((state) => state.cartItems);
 
   const handleClearCart = () => {
-    dispatch(clearCart);
+    dispatch(clearCart());
   }
 
   return (
@@ -45,8 +45,8 @@ const Cart = () => {
         </div>
         <div className="line"></div>
         <div className="shoppingCart__total total">
-          <p className="total__subtotal">SUB TOTAL: <span className="total__subPrice">$900</span></p>
-          <p className="total__grandtotal">GRAND TOTAL: <span className="total__grandPrice">$900</span></p>
+          <p className="total__subtotal">SUB TOTAL: <span className="total__subPrice">{totalPrice.toFixed(2)}</span></p>
+          <p className="total__grandtotal">GRAND TOTAL: <span className="total__grandPrice">{totalPrice.toFixed(2)}</span></p>
           <div className="total__line"></div>
           <button className="shoppingCart__button total__button">PROCEED TO CHECKOUT</button>
         </div>
