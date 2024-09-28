@@ -20,20 +20,33 @@ const initialState = {
   items: [],
   loading: false,
   error: null,
+  totalPages: 1,
+  currentPage: 1,
 };
 
 const catalogSlice = createSlice({
   name: 'catalogItems',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCatalogItems.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchCatalogItems.fulfilled, (state, action) => {
-        state.items = action.payload.data;
+        state.items = action.payload.data.map((item) => ({
+          ...item,
+          selectedColor: null,
+          selectedSize: null,
+          selectedCount: 0
+        }));
         state.loading = false;
+        state.totalPages = action.payload.total;
+        if (state.currentPage > state.totalPages) state.currentPage = state.totalPages;
       })
       .addCase(fetchCatalogItems.rejected, (state, action) => {
         state.loading = false;
@@ -42,4 +55,5 @@ const catalogSlice = createSlice({
   },
 });
 
+export const {setCurrentPage} = catalogSlice.actions;
 export default catalogSlice.reducer;

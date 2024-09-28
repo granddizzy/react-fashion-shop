@@ -78,8 +78,23 @@ const cartSlice = createSlice({
         // saveCartState(state);
       }
     },
+    setCount: (state, action) => {
+      // const item = state.items[action.payload];
+      // item.count = action.payload;
+      // state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
+      // state.totalCount--;
+      // saveCartState(state);
+    },
   }
 });
 
-export const {delProductByCartID, increaseCount, decreaseCount, clearCart, addProduct, delProduct} = cartSlice.actions;
+export const {
+  setCount,
+  delProductByCartID,
+  increaseCount,
+  decreaseCount,
+  clearCart,
+  addProduct,
+  delProduct
+} = cartSlice.actions;
 export default cartSlice.reducer;

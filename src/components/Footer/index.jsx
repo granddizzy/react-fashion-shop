@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="footer__content">
           <div className="container">
             <div className="footer__leftSide">
-              <img src="./img/face.png" alt="face"/>
+              <img src="/img/face.png" alt="face"/>
               <p>“Vestibulum quis porttitor dui! Quisque viverra nunc mi,
                 <span>a pulvinar purus condimentum</span>“</p>
             </div>
@@ -31,22 +31,22 @@ const Footer = () => {
           <div className="socials__icons">
             <a href="#">
               <div className="socials__icon">
-                <img src="./img/facebook.svg" alt="facebook"/>
+                <img src="/img/facebook.svg" alt="facebook"/>
               </div>
             </a>
             <a href="#">
               <div className="socials__icon">
-                <img src="./img/instagram.svg" alt="instagram"/>
+                <img src="/img/instagram.svg" alt="instagram"/>
               </div>
             </a>
             <a href="#">
               <div className="socials__icon">
-                <img src="./img/pinterest.svg" alt="pinterest"/>
+                <img src="/img/pinterest.svg" alt="pinterest"/>
               </div>
             </a>
             <a href="#">
               <div className="socials__icon">
-                <img src="./img/twitter.svg" alt="twitter"/>
+                <img src="/img/twitter.svg" alt="twitter"/>
               </div>
             </a>
           </div>

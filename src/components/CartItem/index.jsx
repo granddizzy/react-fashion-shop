@@ -1,25 +1,33 @@
 import React from 'react';
 import {addProduct, delProduct} from "../../redux/cartSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {setCount} from '../../redux/cartSlice';
 
 const CatalogItem = ({item}) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cartItems.items);
+  const {cartItems} = useSelector((state) => state.cartItems);
 
-  const isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+  const cartItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
   const removeCartItem = (item) => {
-    if (isInCart) {
+    if (cartItem) {
       dispatch(delProduct(item));
     } else {
       dispatch(addProduct(item));
     }
   }
 
+  const handleChangeCount = (e) => {
+    item.selectedCount = e.target.value;
+    setCount(item);
+  }
+
   return (
     <div className="shoppingCart__item shoppingItem">
       <div className="shoppingItem__wrap">
-        <img src={item.photo} alt=""/>
+        {item.photos && item.photos.length > 0 && (
+          <img src={item.photos[0]} alt=""/>
+        )}
         <div className="shoppingItem__rightSide">
           <div className="shoppingItem__rightSideContent">
             <h1>{item.title}</h1>
@@ -29,13 +37,14 @@ const CatalogItem = ({item}) => {
             <p>
               <label>
                 Quantity:
-                <input className="shoppingItem__quantity" name="quantity" placeholder="" type="number"/>
+                <input onChange={handleChangeCount} value={cartItem.count} className="shoppingItem__quantity" name="quantity" placeholder="" type="number"/>
               </label>
             </p>
           </div>
         </div>
       </div>
-      <img onClick={()=>removeCartItem(item)} src="./img/cartCrossButton.svg" className="shoppingItem__crossButton" alt=""/>
+      <img onClick={() => removeCartItem(item)} src="/img/cartCrossButton.svg" className="shoppingItem__crossButton"
+           alt=""/>
     </div>
   );
 };
