@@ -3,11 +3,11 @@ import {addProduct, delProduct} from "../../redux/cartSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setCount} from '../../redux/cartSlice';
 
-const CatalogItem = ({item}) => {
+const CartItem = ({item}) => {
   const dispatch = useDispatch();
-  const {cartItems} = useSelector((state) => state.cartItems);
+  const {items} = useSelector((state) => state.cartItems);
 
-  const cartItem = cartItems.find((cartItem) => cartItem.id === item.id);
+  const cartItem = items.find((cartItem) => cartItem.id === item.id);
 
   const removeCartItem = (item) => {
     if (cartItem) {
@@ -18,8 +18,15 @@ const CatalogItem = ({item}) => {
   }
 
   const handleChangeCount = (e) => {
-    item.selectedCount = e.target.value;
-    setCount(item);
+    const newCount = e.target.value;
+
+    if (newCount > 0 && newCount <= 99) {
+      const updatedCartItem = {
+        ...cartItem,
+        count: e.target.value
+      };
+      dispatch(setCount(updatedCartItem));
+    }
   }
 
   return (
@@ -37,7 +44,8 @@ const CatalogItem = ({item}) => {
             <p>
               <label>
                 Quantity:
-                <input onChange={handleChangeCount} value={cartItem.count} className="shoppingItem__quantity" name="quantity" placeholder="" type="number"/>
+                <input onChange={handleChangeCount} value={cartItem.count} className="shoppingItem__quantity"
+                       name="quantity" placeholder="" type="number"/>
               </label>
             </p>
           </div>
@@ -49,4 +57,4 @@ const CatalogItem = ({item}) => {
   );
 };
 
-export default CatalogItem;
+export default CartItem;

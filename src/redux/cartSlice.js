@@ -79,10 +79,13 @@ const cartSlice = createSlice({
       }
     },
     setCount: (state, action) => {
-      // const item = state.items[action.payload];
-      // item.count = action.payload;
-      // state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
-      // state.totalCount--;
+      const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
+      const item = state.items[itemIndex];
+      state.totalPrice = parseFloat((state.totalPrice - item.price * item.count).toFixed(2));
+      state.totalCount = state.totalCount - item.count;
+      item.count = action.payload.count;
+      state.totalPrice = parseFloat((state.totalPrice + item.price * item.count).toFixed(2));
+      state.totalCount = state.totalCount + item.count;
       // saveCartState(state);
     },
   }
