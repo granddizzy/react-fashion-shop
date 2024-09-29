@@ -1,7 +1,7 @@
 import React from 'react';
 import {delProduct} from "../../redux/cartSlice";
 import {useDispatch} from "react-redux";
-import {updateSelectedData} from '../../redux/cartSlice';
+import {updateSelectedCartData} from '../../redux/cartSlice';
 import {NavLink} from "react-router-dom";
 
 const CartItem = ({item}) => {
@@ -17,7 +17,7 @@ const CartItem = ({item}) => {
       ...item,
       selectedColor: newColor
     };
-    dispatch(updateSelectedData(updatedCartItem));
+    dispatch(updateSelectedCartData(updatedCartItem));
   };
 
   const handleSizeChange = (e) => {
@@ -26,7 +26,7 @@ const CartItem = ({item}) => {
       ...item,
       selectedSize: newSize
     };
-    dispatch(updateSelectedData(updatedCartItem));
+    dispatch(updateSelectedCartData(updatedCartItem));
   };
 
   const handleChangeQuantity = (e) => {
@@ -36,7 +36,7 @@ const CartItem = ({item}) => {
         ...item,
         selectedQuantity: newQuantity
       };
-      dispatch(updateSelectedData(updatedCartItem));
+      dispatch(updateSelectedCartData(updatedCartItem));
     }
   }
 
@@ -86,7 +86,8 @@ const CartItem = ({item}) => {
             <p>
               <label>
                 Quantity:
-                <input onChange={handleChangeQuantity} value={item.selectedQuantity} className="shoppingItem__quantitySelect"
+                <input onChange={handleChangeQuantity} value={item.selectedQuantity}
+                       className="shoppingItem__quantitySelect"
                        name="quantity" placeholder="" type="number" min="1"
                        step="1"/>
               </label>

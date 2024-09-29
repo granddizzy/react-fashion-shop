@@ -39,7 +39,7 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       state.totalQuantity = 0;
     },
-    updateSelectedData: (state, action) => {
+    updateSelectedCartData: (state, action) => {
       const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
       const item = state.items[itemIndex];
       item.selectedColor = action.payload.selectedColor;
@@ -59,6 +59,6 @@ export const {
   clearCart,
   addProduct,
   delProduct,
-  updateSelectedData
+  updateSelectedCartData
 } = cartSlice.actions;
 export default cartSlice.reducer;

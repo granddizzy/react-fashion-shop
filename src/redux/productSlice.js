@@ -26,7 +26,7 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    updateSelectedData: (state, action) => {
+    updateSelectedProductData: (state, action) => {
       state.product.selectedColor = action.payload.selectedColor;
       state.product.selectedSize = action.payload.selectedSize;
       state.product.selectedQuantity = action.payload.selectedQuantity;
@@ -54,5 +54,5 @@ const productSlice = createSlice({
   },
 });
 
-export const {updateSelectedData} = productSlice.actions;
+export const {updateSelectedProductData} = productSlice.actions;
 export default productSlice.reducer;
