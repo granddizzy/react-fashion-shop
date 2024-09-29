@@ -24,7 +24,6 @@ const cartSlice = createSlice({
         state.totalPrice = parseFloat((state.totalPrice + action.payload.price).toFixed(2));
       }
       state.totalCount++;
-      // saveCartState(state);
     },
     delProduct: (state, action) => {
       // const itemIndex = state.items.findIndex(item => item.id === action.payload.id
@@ -41,7 +40,6 @@ const cartSlice = createSlice({
           state.items.splice(itemIndex, 1);
         }
         state.totalCount--;
-        // saveCartState(state);
       }
     },
     delProductByCartID: (state, action) => {
@@ -52,13 +50,11 @@ const cartSlice = createSlice({
       state.totalPrice = parseFloat((state.totalPrice - itemToDelete.price * itemToDelete.count).toFixed(2));
       // }
       state.totalCount = state.totalCount - itemToDelete.count;
-      // saveCartState(state);
     },
     clearCart: (state, action) => {
       state.items = [];
       state.totalPrice = 0;
       state.totalCount = 0;
-      // saveCartState(state);
     },
     increaseCount: (state, action) => {
       const item = state.items[action.payload];
@@ -66,7 +62,6 @@ const cartSlice = createSlice({
         item.count++;
         state.totalPrice = parseFloat((state.totalPrice + item.price).toFixed(2));
         state.totalCount++;
-        // saveCartState(state);
       }
     },
     decreaseCount: (state, action) => {
@@ -75,7 +70,6 @@ const cartSlice = createSlice({
         item.count--;
         state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
         state.totalCount--;
-        // saveCartState(state);
       }
     },
     setCount: (state, action) => {
@@ -86,7 +80,16 @@ const cartSlice = createSlice({
       item.count = action.payload.count;
       state.totalPrice = parseFloat((state.totalPrice + item.price * item.count).toFixed(2));
       state.totalCount = state.totalCount + item.count;
-      // saveCartState(state);
+    },
+    setSelectedColor: (state, action) => {
+      const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
+      const item = state.items[itemIndex];
+      item.selectedColor = action.payload.selectedColor;
+    },
+    setSelectedSize: (state, action) => {
+      const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
+      const item = state.items[itemIndex];
+      item.selectedSize = action.payload.selectedSize;
     },
   }
 });
@@ -98,6 +101,8 @@ export const {
   decreaseCount,
   clearCart,
   addProduct,
-  delProduct
+  delProduct,
+  setSelectedColor,
+  setSelectedSize
 } = cartSlice.actions;
 export default cartSlice.reducer;
