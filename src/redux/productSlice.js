@@ -40,8 +40,8 @@ const productSlice = createSlice({
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.product = {
           ...action.payload,
-          selectedColor: null,
-          selectedSize: null,
+          selectedColor: undefined,
+          selectedSize: undefined,
           selectedQuantity: 1
         };
         state.loading = false;

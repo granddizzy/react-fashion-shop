@@ -40,8 +40,8 @@ const catalogSlice = createSlice({
       .addCase(fetchCatalogItems.fulfilled, (state, action) => {
         state.items = action.payload.data.map((item) => ({
           ...item,
-          selectedColor: null,
-          selectedSize: null,
+          selectedColor: undefined,
+          selectedSize: undefined,
           selectedQuantity: 1
         }));
         state.loading = false;

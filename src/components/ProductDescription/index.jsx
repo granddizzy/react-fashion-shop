@@ -35,7 +35,7 @@ const ProductDescription = ({product}) => {
   };
 
   const handleQuantityChange = (e) => {
-    const newQuantity = e.target.value;
+    const newQuantity = parseInt(e.target.value);
     const updatedProduct = {
       ...product,
       selectedQuantity: newQuantity

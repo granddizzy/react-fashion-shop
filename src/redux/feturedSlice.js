@@ -32,7 +32,12 @@ const featuredSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchFeaturedItems.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = action.payload.map((item) => ({
+          ...item,
+          selectedColor: undefined,
+          selectedSize: undefined,
+          selectedQuantity: 1
+        }));
         state.loading = false;
       })
       .addCase(fetchFeaturedItems.rejected, (state, action) => {
