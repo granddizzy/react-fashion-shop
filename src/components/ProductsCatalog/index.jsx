@@ -7,7 +7,7 @@ import {setCurrentPage} from '../../redux/catalogSlice'
 
 const Catalog = () => {
   const dispatch = useDispatch();
-  const {items, loading, error, totalPages, currentPage} = useSelector((state) => state.catalogItems);
+  const {items, loading, error, totalPages, currentPage} = useSelector((state) => state.products);
   const {type, sizes, trendingNow, minPrice, maxPrice} = useSelector((state) => state.catalogFilter);
 
   const generateQueryParams = () => {

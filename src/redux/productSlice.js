@@ -25,15 +25,27 @@ const initialState = {
 const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {},
+  reducers: {
+    updateSelectedData: (state, action) => {
+      state.product.selectedColor = action.payload.selectedColor;
+      state.product.selectedSize = action.payload.selectedSize;
+      state.product.selectedQuantity = action.payload.selectedQuantity;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProduct.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.product = action.payload;
+        state.product = {
+          ...action.payload,
+          selectedColor: null,
+          selectedSize: null,
+          selectedQuantity: 1
+        };
         state.loading = false;
+
       })
       .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
@@ -42,4 +54,5 @@ const productSlice = createSlice({
   },
 });
 
+export const {updateSelectedData} = productSlice.actions;
 export default productSlice.reducer;

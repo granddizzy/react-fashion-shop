@@ -22,8 +22,8 @@ const CatalogProduct = () => {
     <>
       {product && (
         <>
-          <ProductSlider product={product} />
-          <ProductDescription product={product} />
+          <ProductSlider product={product}/>
+          <ProductDescription product={product}/>
         </>
       )}
     </>

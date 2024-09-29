@@ -42,7 +42,7 @@ const catalogSlice = createSlice({
           ...item,
           selectedColor: null,
           selectedSize: null,
-          selectedCount: 0
+          selectedQuantity: 1
         }));
         state.loading = false;
         state.totalPages = action.payload.total;
@@ -55,5 +55,5 @@ const catalogSlice = createSlice({
   },
 });
 
-export const {setCurrentPage} = catalogSlice.actions;
+export const {updateSelectedData, setCurrentPage} = catalogSlice.actions;
 export default catalogSlice.reducer;

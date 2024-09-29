@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addProduct, delProduct} from "../../redux/cartSlice";
+import {updateSelectedData} from "../../redux/productSlice";
 
 const ProductDescription = ({product}) => {
   const dispatch = useDispatch();
@@ -15,6 +16,33 @@ const ProductDescription = ({product}) => {
     }
   }
 
+  const handleColorChange = (e) => {
+    const newColor = e.target.value;
+    const updatedProduct = {
+      ...product,
+      selectedColor: newColor
+    };
+    dispatch(updateSelectedData(updatedProduct));
+  };
+
+  const handleSizeChange = (e) => {
+    const newSize = e.target.value;
+    const updatedProduct = {
+      ...product,
+      selectedSize: newSize
+    };
+    dispatch(updateSelectedData(updatedProduct));
+  };
+
+  const handleQuantityChange = (e) => {
+    const newQuantity = e.target.value;
+    const updatedProduct = {
+      ...product,
+      selectedQuantity: newQuantity
+    };
+    dispatch(updateSelectedData(updatedProduct));
+  };
+
   return (
     <>
       <section className="productDescription">
@@ -27,33 +55,41 @@ const ProductDescription = ({product}) => {
             <p className="productDescription__price">{product.price.toFixed(2)}</p>
             <div className="productDescription__line2"></div>
             <div className="productDescription__sectionFilter filter">
+              {/* Выбор цвета */}
               <details className="filter__item">
                 <summary>CHOOSE COLOR</summary>
                 <div className="filter__detailsBox">
-
+                  <select value={product.selectedColor} onChange={handleColorChange}>
+                    {product.colors.map((color, index) => (
+                      <option key={index} value={color}>{color}</option>
+                    ))}
+                  </select>
                 </div>
               </details>
+
+              {/* Выбор размера */}
               <details className="filter__item">
                 <summary>CHOOSE SIZE</summary>
-                <div className="filter__detailsBox filter__menuSize">
-                  <label>
-                    <input type="checkbox"/> XS
-                  </label>
-                  <label>
-                    <input type="checkbox"/> S
-                  </label>
-                  <label>
-                    <input type="checkbox"/> M
-                  </label>
-                  <label>
-                    <input type="checkbox"/> L
-                  </label>
+                <div className="filter__detailsBox">
+                  <select value={product.selectedSize} onChange={handleSizeChange}>
+                    {product.sizes.map((size, index) => (
+                      <option key={index} value={size}>{size}</option>
+                    ))}
+                  </select>
                 </div>
               </details>
+
+              {/* Выбор количества */}
               <details className="filter__item">
                 <summary>QUANTITY</summary>
                 <div className="filter__detailsBox">
-
+                  <input
+                    type="number"
+                    value={product.selectedQuantity}
+                    onChange={handleQuantityChange}
+                    min="1"
+                    max="99"
+                  />
                 </div>
               </details>
             </div>
@@ -66,7 +102,6 @@ const ProductDescription = ({product}) => {
               <p>{isInCart ? "Remove" : "Add to Cart"}</p>
             </div>
           </div>
-          ]
         </div>
       </section>
     </>
