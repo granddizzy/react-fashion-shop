@@ -4,7 +4,7 @@ import {fetchCategoriesItems} from '../../redux/categoriesSlice';
 import {fetchBrandsItems} from '../../redux/brandSlice';
 import {fetchDesignersItems} from '../../redux/designersSlice';
 import {useDispatch, useSelector} from "react-redux";
-import {setBrand, setCategory, setDesigner} from "../../redux/catalogFilterSlice";
+import {setBrand, setCategory, setDesigner, setType} from "../../redux/catalogFilterSlice";
 
 const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
   const menuRef = useRef(null);
@@ -36,21 +36,24 @@ const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
     dispatch(setCategory(category));
     dispatch(setBrand(''));
     dispatch(setDesigner(''));
-    setIsFilterMenuOpen(false);
+    dispatch(setType(''))
+    // setIsFilterMenuOpen(false);
   }
 
   const handleSetBrand = (brand) => {
     dispatch(setBrand(brand));
     dispatch(setDesigner(''));
     dispatch(setCategory(''));
-    setIsFilterMenuOpen(false);
+    dispatch(setType(''))
+    // setIsFilterMenuOpen(false);
   }
 
   const handleSetDesigner = (designer) => {
     dispatch(setDesigner(designer));
     dispatch(setBrand(''));
     dispatch(setDesigner(''));
-    setIsFilterMenuOpen(false);
+    dispatch(setType(''))
+    // setIsFilterMenuOpen(false);
   }
 
   return (

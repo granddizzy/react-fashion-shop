@@ -29,7 +29,8 @@ const catalogSlice = createSlice({
   initialState,
   reducers: {
     setCurrentPage: (state, action) => {
-      state.currentPage = action.payload;
+      const newPage = action.payload;
+      state.currentPage = Math.max(1, newPage);
     },
   },
   extraReducers: (builder) => {
@@ -46,7 +47,9 @@ const catalogSlice = createSlice({
         }));
         state.loading = false;
         state.totalPages = action.payload.total;
-        if (state.currentPage > state.totalPages) state.currentPage = state.totalPages;
+        if (state.currentPage > state.totalPages) {
+          state.currentPage = state.totalPages > 0 ? state.totalPages : 1;
+        }
       })
       .addCase(fetchCatalogItems.rejected, (state, action) => {
         state.loading = false;

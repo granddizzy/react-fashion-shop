@@ -7,6 +7,8 @@ import productReducer from './productSlice';
 import designersReducer from "./designersSlice";
 import brandsReducer from "./brandSlice";
 import categoriesReducer from "./categoriesSlice";
+import typesReducer from "./typesSlice";
+import categoriesByTypesReducer from "./categoriesByTypesSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +20,8 @@ const store = configureStore({
     designers: designersReducer,
     brands: brandsReducer,
     categories: categoriesReducer,
+    types: typesReducer,
+    categoriesByTypes: categoriesByTypesReducer,
   },
 });
 
