@@ -1,7 +1,18 @@
 import React, {useEffect, useRef} from 'react';
 
+import {fetchCategoriesItems} from '../../redux/categoriesSlice';
+import {fetchBrandsItems} from '../../redux/brandSlice';
+import {fetchDesignersItems} from '../../redux/designersSlice';
+import {useDispatch, useSelector} from "react-redux";
+import {setBrand, setCategory, setDesigner} from "../../redux/catalogFilterSlice";
+
 const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
   const menuRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const categories = useSelector((state) => state.categories.items);
+  const brands = useSelector((state) => state.brands.items);
+  const designers = useSelector((state) => state.designers.items);
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -12,10 +23,35 @@ const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
 
+    dispatch(fetchCategoriesItems('https://lepihov.by/api-fashion-shop/categories'));
+    dispatch(fetchBrandsItems(`https://lepihov.by/api-fashion-shop/brands`));
+    dispatch(fetchDesignersItems(`https://lepihov.by/api-fashion-shop/designers`));
+
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [isFilterMenuOpen]);
+
+  const handleSetCategory = (category) => {
+    dispatch(setCategory(category));
+    dispatch(setBrand(''));
+    dispatch(setDesigner(''));
+    setIsFilterMenuOpen(false);
+  }
+
+  const handleSetBrand = (brand) => {
+    dispatch(setBrand(brand));
+    dispatch(setDesigner(''));
+    dispatch(setCategory(''));
+    setIsFilterMenuOpen(false);
+  }
+
+  const handleSetDesigner = (designer) => {
+    dispatch(setDesigner(designer));
+    dispatch(setBrand(''));
+    dispatch(setDesigner(''));
+    setIsFilterMenuOpen(false);
+  }
 
   return (
     <div ref={menuRef} className="catalog__detailsBox catalog__menuFilter">
@@ -30,29 +66,25 @@ const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
       <details>
         <summary className="catalog__topLevel">CATEGORY</summary>
         <div className="catalog__detailsBox2">
-          <a href="#">Accessories</a>
-          <a href="#">Bags</a>
-          <a href="#">Denim</a>
-          <a href="#">Hoodies & Sweatdhirts</a>
-          <a href="#">Jackets & Coats</a>
-          <a href="#">Polos</a>
-          <a href="#">Shirts</a>
-          <a href="#">Shoes</a>
-          <a href="#">Sweaters & Knits</a>
-          <a href="#">T-Shirts</a>
-          <a href="#">Tanks</a>
+          {categories.map(category => (
+            <a key={category} href="#" onClick={() => handleSetCategory(category)}>{category}</a>
+          ))}
         </div>
       </details>
       <details>
         <summary className="catalog__topLevel">BRAND</summary>
         <div className="catalog__detailsBox2">
-
+          {brands.map(brand => (
+            <a key={brand} href="#" onClick={() => handleSetBrand(brand)}>{brand}</a>
+          ))}
         </div>
       </details>
       <details>
         <summary className="catalog__topLevel">DESIGNER</summary>
         <div className="catalog__detailsBox2">
-
+          {designers.map(designer => (
+            <a key={designer} href="#" onClick={() => handleSetDesigner(designer)}>{designer}</a>
+          ))}
         </div>
       </details>
     </div>

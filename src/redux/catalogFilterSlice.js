@@ -6,6 +6,9 @@ const initialState = {
   maxPrice: 0,
   minPrice: 0,
   type: '',
+  category: '',
+  brand: '',
+  designer: ''
 };
 
 const catalogFilerSlice = createSlice({
@@ -37,9 +40,29 @@ const catalogFilerSlice = createSlice({
     },
     toggleTrendingNow: (state, action) => {
       state.trendingNow = !state.trendingNow;
-    }
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    setDesigner: (state, action) => {
+      state.designer = action.payload;
+    },
+    setBrand: (state, action) => {
+      state.brand = action.payload;
+    },
   },
 });
 
-export const {toggleTrendingNow, setType, toggleSize, setSizes, setTrendingNow, setMaxPrice, setMinPrice} = catalogFilerSlice.actions;
+export const {
+  toggleTrendingNow,
+  setType,
+  toggleSize,
+  setSizes,
+  setTrendingNow,
+  setMaxPrice,
+  setMinPrice,
+  setBrand,
+  setCategory,
+  setDesigner,
+} = catalogFilerSlice.actions;
 export default catalogFilerSlice.reducer;

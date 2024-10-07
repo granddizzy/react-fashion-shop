@@ -8,7 +8,7 @@ import {setCurrentPage} from '../../redux/catalogSlice'
 const Catalog = () => {
   const dispatch = useDispatch();
   const {items, loading, error, totalPages, currentPage} = useSelector((state) => state.products);
-  const {type, sizes, trendingNow, minPrice, maxPrice} = useSelector((state) => state.catalogFilter);
+  const {type, sizes, trendingNow, minPrice, maxPrice, brand, category, designer} = useSelector((state) => state.catalogFilter);
 
   const generateQueryParams = () => {
     const params = new URLSearchParams();
@@ -30,6 +30,18 @@ const Catalog = () => {
       params.append("type", type);
     }
 
+    if (brand !== '') {
+      params.append("brand", brand);
+    }
+
+    if (category !== '') {
+      params.append("category", category);
+    }
+
+    if (designer !== '') {
+      params.append("designer", designer);
+    }
+
     params.append("page", currentPage);
 
     return params.toString();
@@ -38,7 +50,7 @@ const Catalog = () => {
   useEffect(() => {
     const queryParams = generateQueryParams();
     dispatch(fetchCatalogItems(`https://lepihov.by/api-fashion-shop/catalog?${queryParams}`));
-  }, [sizes, trendingNow, minPrice, maxPrice, currentPage]);
+  }, [sizes, trendingNow, minPrice, maxPrice, currentPage, category, brand, designer]);
 
   const handleChangePage = (page) => {
     dispatch(setCurrentPage(page));
