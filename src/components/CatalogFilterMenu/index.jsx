@@ -54,7 +54,7 @@ const CatalogFilterMenu = ({isFilterMenuOpen, setIsFilterMenuOpen}) => {
   const handleSetDesigner = (designer) => {
     dispatch(setDesigner(designer));
     dispatch(setBrand(''));
-    dispatch(setDesigner(''));
+    dispatch(setCategory(''));
     dispatch(setType(''))
     setIsFilterMenuOpen(false);
   }
