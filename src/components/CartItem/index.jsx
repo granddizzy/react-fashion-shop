@@ -43,7 +43,7 @@ const CartItem = ({item}) => {
   return (
     <div className="shoppingCart__item shoppingItem">
       <div className="shoppingItem__wrap">
-        <NavLink to={`/catalog/${item.id}`}>
+        <NavLink to={`${process.env.PUBLIC_URL}/catalog/${item.id}`}>
           {item.photos && item.photos.length > 0 && (
             <img src={item.photos[0]} alt=""/>
           )}
