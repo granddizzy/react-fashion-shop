@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProduct} from "../redux/productSlice";
 import ProductDescription from "../components/ProductDescription";
+import {useApi} from "../contexts/apiContext";
 
 const CatalogProduct = () => {
   const {productId} = useParams();
@@ -11,8 +12,10 @@ const CatalogProduct = () => {
   const dispatch = useDispatch();
   const {product, loading, error} = useSelector((state) => state.product);
 
+  const apiUrl = useApi();
+
   useEffect(() => {
-    dispatch(fetchProduct(`https://lepihov.by/api-fashion-shop/catalog/${productId}`));
+    dispatch(fetchProduct(`${apiUrl}/catalog/${productId}`));
   }, [productId]);
 
   if (loading) return <p>Loading...</p>;
