@@ -4,6 +4,7 @@ import {fetchCatalogItems} from "../../redux/catalogSlice";
 import CatalogItem from "../CatalogItem";
 import CatalogPagination from "../CatalogPagination";
 import {setCurrentPage} from '../../redux/catalogSlice'
+import {useApi} from "../../contexts/apiContext";
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -56,9 +57,11 @@ const Catalog = () => {
     return params.toString();
   };
 
+  const apiUrl = useApi();
+
   useEffect(() => {
     const queryParams = generateQueryParams();
-    dispatch(fetchCatalogItems(`https://lepihov.by/api-fashion-shop/catalog?${queryParams}`));
+    dispatch(fetchCatalogItems(`${apiUrl}/catalog?${queryParams}`));
   }, [sizes, trendingNow, minPrice, maxPrice, currentPage, category, brand, designer, type]);
 
   const handleChangePage = (page) => {

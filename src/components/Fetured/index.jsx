@@ -4,13 +4,16 @@ import {fetchFeaturedItems} from "../../redux/feturedSlice";
 import CatalogItem from "../CatalogItem";
 import {NavLink} from "react-router-dom";
 import {addProduct} from '../../redux/cartSlice';
+import {useApi} from "../../contexts/apiContext";
 
 const Fetured = () => {
   const dispatch = useDispatch();
   const {items, loading, error} = useSelector((state) => state.featuredItems);
 
+  const apiUrl = useApi();
+
   useEffect(() => {
-    dispatch(fetchFeaturedItems("https://lepihov.by/api-fashion-shop/fetured"));
+    dispatch(fetchFeaturedItems(`${apiUrl}/fetured`));
   }, []);
 
   if (loading) return <p>Loading...</p>;
@@ -26,7 +29,7 @@ const Fetured = () => {
         ))}
       </div>
       <div className="feturedItems__buttons">
-        <NavLink to="/catalog">
+        <NavLink to={`/catalog`}>
           <button id="catalogButton" className="feturedItems__allButton">Browse All Products</button>
         </NavLink>
       </div>

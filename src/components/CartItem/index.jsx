@@ -95,7 +95,7 @@ const CartItem = ({item}) => {
           </div>
         </div>
       </div>
-      <img onClick={() => removeCartItem(item)} src="/img/cartCrossButton.svg" className="shoppingItem__crossButton"
+      <img onClick={() => removeCartItem(item)} src={`${process.env.PUBLIC_URL}/img/cartCrossButton.svg`} className="shoppingItem__crossButton"
            alt=""/>
     </div>
   );

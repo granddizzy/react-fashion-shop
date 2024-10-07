@@ -10,7 +10,7 @@ import Catalog from "./pages/Catalog";
 import Registration from "./pages/registration";
 import Cart from "./pages/Cart";
 
-const baseUrl = "";
+const baseUrl = "/react-fashion-shop";
 
 function App() {
   return (
