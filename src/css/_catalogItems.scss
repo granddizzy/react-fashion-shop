@@ -15,6 +15,7 @@
     @include fontStyle1(400, 14px);
     margin-top: 6px;
     text-align: center;
+    min-height: 30px;
   }
 
   &__buttons {
@@ -97,6 +98,7 @@
       color: #5D5D5D;
       @include fontStyle1(300, 14px);
       margin: 16px 0;
+      min-height: 30px;
     }
 
     &__price {

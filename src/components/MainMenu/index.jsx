@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 
-const MainMenu = () => {
+const MainMenu = ({menuRef}) => {
   return (
-    <div className="mainMenu">
+    <div className="mainMenu" ref={menuRef}>
       <h3>MENU</h3>
       <ul className="mainMenu__firstLevel">
         <li>

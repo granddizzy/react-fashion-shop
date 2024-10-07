@@ -10,22 +10,23 @@
 
     height: 132px;
 
-    summary {
-      @include flexCenter();
-    }
-
-    details {
-      position: relative;
-    }
+    //summary {
+    //  @include flexCenter();
+    //}
+    //
+    //details {
+    //  position: relative;
+    //}
   }
 
   &__sectionFilterLeftSide {
     color: #6F6E6E;
+    position: relative;
 
-    summary {
-      @include flexCenter();
-      justify-content: flex-start;
-    }
+    //summary {
+    //  @include flexCenter();
+    //  justify-content: flex-start;
+    //}
 
     .catalog__detailsBox2 {
       @include flexCenter();
