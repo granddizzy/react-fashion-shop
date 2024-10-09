@@ -19,6 +19,13 @@ const Fetured = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section className="feturedItems container">
       <h1>Featured Items</h1>
@@ -29,7 +36,7 @@ const Fetured = () => {
         ))}
       </div>
       <div className="feturedItems__buttons">
-        <NavLink to={`/catalog`}>
+        <NavLink to={`/catalog`} onClick={handleScrollToTop}>
           <button id="catalogButton" className="feturedItems__allButton">Browse All Products</button>
         </NavLink>
       </div>

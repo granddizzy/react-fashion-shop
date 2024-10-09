@@ -64,8 +64,16 @@ const Catalog = () => {
     dispatch(fetchCatalogItems(`${apiUrl}/catalog?${queryParams}`));
   }, [sizes, trendingNow, minPrice, maxPrice, currentPage, category, brand, designer, type]);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const handleChangePage = (page) => {
     dispatch(setCurrentPage(page));
+    handleScrollToTop();
   }
 
   if (loading) return <p>Loading...</p>;
