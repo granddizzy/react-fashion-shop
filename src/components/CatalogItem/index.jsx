@@ -32,7 +32,7 @@ const CatalogItem = ({item}) => {
           </div>
         </div>
       </div>
-      <NavLink to={`${process.env.PUBLIC_URL}/catalog/${item.id}`}>
+      <NavLink to={`/catalog/${item.id}`}>
         <div className="catalogItem__text">
           <h3 className="catalogItem__title">{item.title}</h3>
           <p className="catalogItem__description">{item.description}</p>

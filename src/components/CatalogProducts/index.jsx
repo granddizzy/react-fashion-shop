@@ -5,6 +5,7 @@ import CatalogItem from "../CatalogItem";
 import CatalogPagination from "../CatalogPagination";
 import {setCurrentPage} from '../../redux/catalogSlice'
 import {useApi} from "../../contexts/apiContext";
+import CatalogItemSkeleton from "../CatalogItemSkeleton";
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -76,15 +77,18 @@ const Catalog = () => {
     handleScrollToTop();
   }
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
       <div className="catalogItems">
-        {items.map((item) => (
-          <CatalogItem key={item.id} item={item}/>
-        ))}
+        {loading
+          ? Array.from({length: 9}).map((_, index) => (
+            <CatalogItemSkeleton key={index}/>
+          ))
+          : items.map((item) => (
+            <CatalogItem key={item.id} item={item}/>
+          ))}
       </div>
       {totalPages > 0 && (
         <CatalogPagination

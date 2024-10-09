@@ -23,7 +23,7 @@ const MainMenu = ({menuRef, setIsMenuOpen}) => {
   const handleSetType = (type) => {
     dispatch(setType(type));
     dispatch(setCategory(''));
-    setIsMenuOpen(true);
+    setIsMenuOpen(false);
   }
 
   return (
